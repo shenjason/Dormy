@@ -1,0 +1,18 @@
+numpy
+scipy
+sounddevice
+soundfile
+livekit-wakeword
+google-genai
+pocket-tts
+# Switches pocket-tts's int8 path from the deprecated torch.ao/qnnpack backend
+# to torchao. Worth ~4% RTF on this Pi and nothing more -- the PyPI wheel for
+# aarch64 is py3-none-any with no compiled kernels, so this is the ATen path,
+# not the optimized one the pocket-tts docstring advertises. Optional.
+torchao>=0.16.0
+# Spotify.py. Replaced spotify-cli, which is dead on Python 3.13 (PyInquirer ->
+# prompt_toolkit 1.0.14 -> `from collections import Mapping`) and, worse, relayed every
+# token refresh -- and your client secret -- through the author's 2020 cloud function.
+# spotipy talks to Spotify directly and caches the token locally. Needs your own app:
+# SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET in .env, then `python Spotify.py login`.
+spotipy>=2.26
